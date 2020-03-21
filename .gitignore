@@ -1,0 +1,9 @@
+*.class
+*.jar
+.metadata
+.classpath
+.project
+.settings/
+target/
+.DS_Store
+reports/
