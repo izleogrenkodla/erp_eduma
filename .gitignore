@@ -7,4 +7,9 @@
 target/
 .DS_Store
 reports/
+<<<<<<< HEAD
 
+=======
+.idea/
+*.iml
+>>>>>>> 53ed3ed79adbcf4984400b6284c9acb32b673743
