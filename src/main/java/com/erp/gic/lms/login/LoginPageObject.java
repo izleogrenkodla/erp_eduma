@@ -1,5 +1,6 @@
 package com.erp.gic.lms.login;
 
+import cucumber.api.java.After;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,13 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPageObject {
 
     public static WebDriver driver;
-
-    public LoginPageObject()
-    {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        PageFactory.initElements(driver,this);
-    }
 
     @FindBy(xpath="//*[@id=\"login-popup-2\"]/div/div[1]/a")
     WebElement loginBtn;
@@ -34,9 +28,20 @@ public class LoginPageObject {
     @FindBy(xpath="//*[@id=\"login-popup-2\"]/div/div/a[2]")
     WebElement logout;
 
-    public void launch(String url)
+    public LoginPageObject()
     {
-        driver.get(url);
+        PageFactory.initElements(driver,this);
+    }
+
+    public void browserLaunch()
+    {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+    }
+
+    public void browserQuit()
+    {
+        driver.quit();
     }
 
     public void loginClick()
@@ -56,8 +61,4 @@ public class LoginPageObject {
        logout.isDisplayed();
     }
 
-    public void browserQuit()
-    {
-        driver.quit();
-    }
 }
