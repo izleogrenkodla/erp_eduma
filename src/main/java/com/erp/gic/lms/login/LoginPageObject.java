@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
 public class LoginPageObject {
 
     public static WebDriver driver;
@@ -30,6 +31,9 @@ public class LoginPageObject {
     @FindBy(name="wp-submit")
     WebElement login;
 
+    @FindBy(xpath="//*[@id=\"login-popup-2\"]/div/div/a[2]")
+    WebElement logout;
+
     public void launch(String url)
     {
         driver.get(url);
@@ -45,6 +49,11 @@ public class LoginPageObject {
         usernameTxtFld.sendKeys(uname);
         passwordTxtFld.sendKeys(pwd);
         login.click();
+    }
+
+    public void validateLogin()
+    {
+       logout.isDisplayed();
     }
 
     public void browserQuit()
