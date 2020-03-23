@@ -14,11 +14,14 @@ public class CollectionSectionSD extends LoginPageObject {
     public void i_click_on_the_collection_course(String collectionName) throws Throwable {
        Thread.sleep(4000);
        homePageObject.scrollclickcode();
+        Thread.sleep(4000);
        homePageObject.collectionClick(collectionName);
     }
 
     @Then("^I should be on collection page$")
     public void i_should_be_on_collection_page() throws Throwable {
+        Thread.sleep(8000);
+        homePageObject.collectionPageDisplay();
 
 
 

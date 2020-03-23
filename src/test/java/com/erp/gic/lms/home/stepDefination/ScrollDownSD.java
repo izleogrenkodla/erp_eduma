@@ -20,5 +20,6 @@ public class ScrollDownSD extends LoginPageObject {
     public void i_should_see_the_collection_list() throws Throwable {
         Thread.sleep(5000);
         homePageObject.validateCollectionDisplay();
+
     }
 }

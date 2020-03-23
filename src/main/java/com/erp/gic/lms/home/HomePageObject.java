@@ -26,17 +26,20 @@ public class HomePageObject{
     @FindBy(xpath="//*[@id=\"main-home-content\"]/div[1]/a")
     WebElement scrollClick;
 
-    @FindBy(xpath="//*[@id=\"main-home-content\"]/div[3]/div/div/div/div/div/div[1]/div/div/a[2]")
+    @FindBy(xpath="/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div/div/div[1]/div/div/a[1]")
     WebElement collection1;
 
-    @FindBy(xpath="//*[@id=\"main-home-content\"]/div[3]/div/div/div/div/div/div[2]/div/div/a[2]")
+    @FindBy(xpath="//*[@id=\"main-home-content\"]/div[3]/div/div/div/div/div/div[2]/div/div/a[1]")
     WebElement collection2;
 
-    @FindBy(xpath="//*[@id=\"main-home-content\"]/div[3]/div/div/div/div/div/div[3]/div[1]/div/div/a[2]")
+    @FindBy(xpath="//*[@id=\"main-home-content\"]/div[3]/div/div/div/div/div/div[3]/div[1]/div/div/a[1]")
     WebElement collection3;
 
-    @FindBy(xpath="//*[@id=\"main-home-content\"]/div[3]/div/div/div/div/div/div[3]/div[2]/div/div/a[2]")
+    @FindBy(xpath="//*[@id=\"main-home-content\"]/div[3]/div/div/div/div/div/div[3]/div[2]/div/div/a[1]")
     WebElement collection4;
+
+    @FindBy(xpath="//*[@id=\"main-content\"]/section/div[1]/div[1]/div/div/h2")
+    WebElement collectionPage;
 
     public HomePageObject(WebDriver driver)
     {
@@ -84,21 +87,27 @@ public class HomePageObject{
     /*Validate collection click*/
     public void collectionClick(String collectionName)
     {
-        if(collectionName=="Education WordPress Theme")
-        {
-            collection1.click();
+        String value;
+        switch (value = collectionName) {
+            case "Education WordPress Theme":
+                collection1.click();
+                break;
+            case "Best Courses for Photography":
+                collection2.click();
+                break;
+            case "Top Tutorials Code for Startup":
+                collection3.click();
+                break;
+            case"The Top PHP Tutorials":
+                collection4.click();
+                break;
+            default:
         }
-        else if (collectionName=="Best Courses for Photography")
-        {
-            collection2.click();
-        }
-        else if (collectionName=="Top Tutorials Code for Startup")
-        {
-           collection3.click();
-        }
-        else if (collectionName=="The Top PHP Tutorials")
-        {
-            collection4.click();
-        }
+    }
+
+    /*Validate collection page*/
+    public void collectionPageDisplay()
+    {
+        collectionPage.isDisplayed();
     }
 }
