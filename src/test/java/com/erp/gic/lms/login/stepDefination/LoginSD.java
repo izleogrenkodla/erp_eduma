@@ -8,16 +8,16 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginSD {
 
-    public static WebDriver driver;
     LoginPageObject loginPageObject = new LoginPageObject();
 
     @Given("^I am on the application url$")
     public void i_am_on_the_application_url() throws Throwable {
-        loginPageObject.launch("http://sethuonline.com/lms_r2/");
+        loginPageObject.driver.get("http://sethuonline.com/lms_r2/");
     }
 
     @When("^I click on the login button$")
     public void i_click_on_the_login_button() throws Throwable {
+        Thread.sleep(3000);
         loginPageObject.loginClick();
     }
 
@@ -31,7 +31,6 @@ public class LoginSD {
     public void i_should_be_successfully_logged_in_and_be_on_home_page() throws Throwable {
         Thread.sleep(3000);
         loginPageObject.validateLogin();
-        loginPageObject.browserQuit();
     }
 
 }
