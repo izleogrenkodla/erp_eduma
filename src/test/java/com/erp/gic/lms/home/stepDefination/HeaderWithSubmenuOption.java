@@ -17,10 +17,10 @@ public class HeaderWithSubmenuOption extends LoginPageObject {
 
     }
 
-    @Then("^I should be on the selected option page$")
-    public void i_should_be_on_the_selected_option_page() throws Throwable {
+    @Then("^I should be on \"(.*?)\" page$")
+    public void i_should_be_on_page(String pageName) throws Throwable {
         Thread.sleep(6000);
-        homePageObject.validateSubmenuPage();
+        homePageObject.validateSubmenuPage(pageName);
     }
 
 }
