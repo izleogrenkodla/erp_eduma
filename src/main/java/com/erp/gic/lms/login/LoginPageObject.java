@@ -1,13 +1,12 @@
 package com.erp.gic.lms.login;
 
-import cucumber.api.java.After;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import java.util.concurrent.TimeUnit;
 
 public class LoginPageObject {
 
@@ -46,12 +45,13 @@ public class LoginPageObject {
 
     public void loginClick()
     {
+        implicitWait();
         loginBtn.click();
     }
 
-    public void getLoginDetails(String uname,String pwd)
+    public void getLoginDetails(String username,String pwd)
     {
-        usernameTxtFld.sendKeys(uname);
+        usernameTxtFld.sendKeys(username);
         passwordTxtFld.sendKeys(pwd);
         login.click();
     }
@@ -61,4 +61,8 @@ public class LoginPageObject {
        logout.isDisplayed();
     }
 
+    public void implicitWait()
+    {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
 }
