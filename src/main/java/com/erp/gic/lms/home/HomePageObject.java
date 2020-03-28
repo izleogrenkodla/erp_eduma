@@ -1,21 +1,16 @@
 package com.erp.gic.lms.home;
 
 import com.erp.gic.lms.login.LoginPageObject;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class HomePageObject{
-
-    public static WebDriver driverLoc;
+public class HomePageObject extends LoginPageObject{
+    
     int i = 0;
-
+    
     @FindBy(name="s")
     WebElement searchTxtFld;
 
@@ -26,7 +21,7 @@ public class HomePageObject{
     WebElement noCourseDropDown;
 
     @FindBy(xpath="//*[@id=\"lp-single-course\"]/h1")
-    WebElement courseName;
+    WebElement courseNameDisplay;
 
     @FindBy(xpath="//*[@id=\"main-home-content\"]/div[1]/a")
     WebElement scrollClick;
@@ -52,10 +47,10 @@ public class HomePageObject{
     @FindBy(xpath = "//*[@id=\"menu-item-8110\"]/a")
     WebElement hoverFeatures;
 
-    @FindBy(xpath="//*[@id=\"main-content\"]/section/div[1]/div[1]/div/div/h2")
+    @FindBy(xpath="//*[@id=\"main-content\"]/section/div[1]/div[1]/div/div/h1")
     WebElement submenuPageName1;
 
-    @FindBy(xpath="//*[@id=\"main-content\"]/section/div[1]/div[1]/div/div/h1")
+    @FindBy(xpath="//*[@id=\"main-content\"]/section/div[1]/div[1]/div/div/h2")
     WebElement submenuPageName2;
 
     @FindBy(xpath="//*[@id=\"main-content\"]/section/div[1]/div[1]/div/div/h1")
@@ -64,53 +59,50 @@ public class HomePageObject{
     @FindBy(xpath="//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/a")
     WebElement viewAllBtn;
 
-    public HomePageObject(WebDriver driver)
+    //Valid search click code
+    public void validSearchFunction(String text)
     {
-        this.driverLoc = driver;
-        PageFactory.initElements(driver,this);
+        implicitWait();
+        searchTxtFld.sendKeys(text);
+        courseNameDropDown.click();
     }
 
-    /*Valid search click code*/
-    public void validSearchFunction(String text) throws Exception
+    //Invalid search click code
+    public void invalidSearchFunction(String text)
     {
-       searchTxtFld.sendKeys(text);
-       Thread.sleep(5000);
-       courseNameDropDown.click();
-    }
-
-    /*Invalid search click code*/
-    public void invalidSearchFunction(String text) throws Exception
-    {
+        implicitWait();
         searchTxtFld.sendKeys(text);
     }
 
-    /*Validate valid course display*/
+    //Validate valid course display
     public void courseNameValidation()
     {
-        courseName.isDisplayed();
+        implicitWait();
+        courseNameDisplay.isDisplayed();
     }
 
-    /*Validate invalid course display*/
+    //Validate invalid course display
     public void invalidSearchDisplay()
     {
         noCourseDropDown.isDisplayed();
     }
 
-    /*Scroll click code*/
-    public void scrollclickcode()
+    //Scroll click code
+    public void scrollClickCode()
     {
         scrollClick.click();
     }
 
-    /*Validate collection display*/
+    //Validate collection display
     public void validateCollectionDisplay()
     {
         collection1.isDisplayed();
     }
 
-    /*Validate collection click*/
+    //Validate collection click
     public void collectionClick(String collectionName)
     {
+        implicitWait();
         String value;
         switch (value = collectionName) {
             case "Education WordPress Theme":
@@ -129,21 +121,29 @@ public class HomePageObject{
         }
     }
 
-    /*Validate collection page*/
+    //Validate collection page
     public void collectionPageDisplay()
     {
         collectionPage.isDisplayed();
     }
 
-    //hover menu and click submenu
-    public void menuSubmenuOption(String menu,String submenu)
+    //hover over header menu
+    public void hoverOverMenu(String menu)
     {
-        int i = 0;
-        Actions hover = new Actions(driverLoc);
-
+        implicitWait();
+        Actions hover = new Actions(driver);
         if (menu.equals("COURSES"))
         {
             hover.moveToElement(hoverCourses).perform();
+        }
+        else if(menu.equals("FEATURES")) {
+            hover.moveToElement(hoverFeatures).perform();
+        }
+    }
+
+    //click submenu
+    public void submenuOption(String submenu)
+    {
             if(submenu.equals("Free Access Type"))
             {
                 i = 8143;
@@ -176,86 +176,81 @@ public class HomePageObject{
             {
                 i = 8133;
             }
-        }
-        else if(menu.equals("FEATURES")) {
-            hover.moveToElement(hoverFeatures).perform();
-            if (submenu.equals("Gallery")) {
+            else if (submenu.equals("Gallery"))
+            {
                 i = 8135;
-            } else if (submenu.equals("About Us")) {
+            } else if (submenu.equals("About Us"))
+            {
                 i = 8122;
-            } else if (submenu.equals("FAQs")) {
+            } else if (submenu.equals("FAQs"))
+            {
                 i = 8111;
             }
-        }
-        driverLoc.findElement(By.xpath("//*[@id=\"menu-item-"+i+"\"]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"menu-item-"+i+"\"]/a")).click();
     }
 
-    //validate menu and submenu page
-    public void validateSubmenuPage(String page)
+    //validate submenu page
+    public void validateMenuPage(String page)
     {
-        if(page.equals("HOME"))
+        if(page.equals("GENERAL"))
         {
-            searchTxtFld.isDisplayed();
-        }
-        else if(page.equals("GENERAL"))
-        {
-            Assert.assertEquals(submenuPageName1.getText(),"GENERAL");
+        Assert.assertEquals("General",submenuPageName2.getAttribute("innerHTML"));
         }
         else if (page.equals("TECHNOLOGY"))
         {
-            Assert.assertEquals(submenuPageName1.getText(),"TECHNOLOGY");
+            Assert.assertEquals("Technology",submenuPageName2.getAttribute("innerHTML"));
         }
         else if (page.equals("BACKEND"))
         {
-            Assert.assertEquals(submenuPageName1.getText(),"BACKEND");
+            Assert.assertEquals("Backend",submenuPageName2.getAttribute("innerHTML"));
         }
         else if (page.equals("ALL COURSES"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"ALL COURSES");
+            Assert.assertEquals("All Courses",submenuPageName1.getAttribute("innerHTML"));
         }
         else if (page.equals("DEMO ACCOUNTS"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"DEMO ACCOUNTS");
+            Assert.assertEquals("Demo Accounts",submenuPageName1.getAttribute("innerHTML"));
         }
         else if (page.equals("BECOME A TEACHER"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"BECOME A TEACHER");
+            Assert.assertEquals("Become a Teacher",submenuPageName1.getAttribute("innerHTML"));
         }
         else if (page.equals("GALLERY"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"GALLERY");
+            Assert.assertEquals("Gallery",submenuPageName1.getAttribute("innerHTML"));
         }
         else if (page.equals("ABOUT US"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"ABOUT US");
+            Assert.assertEquals("About Us",submenuPageName1.getAttribute("innerHTML"));
         }
         else if (page.equals("FAQ PAGE"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"FAQ PAGE");
+            Assert.assertEquals("FAQ Page",submenuPageName1.getAttribute("innerHTML"));
         }
-        else if (page.equals("ALL COURSES"))
+        else if(page.equals("HOME"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"ALL COURSES");
+            searchTxtFld.isDisplayed();
         }
         else if (page.equals("EVENTS"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"EVENTS");
+            Assert.assertEquals("Events",submenuPageName1.getAttribute("innerHTML"));
         }
         else if (page.equals("PORTFOLIO MASONRY"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"PORTFOLIO MASONRY");
+            Assert.assertEquals("Portfolio Masonry",submenuPageName1.getAttribute("innerHTML"));
         }
         else if (page.equals("BLOG"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"BLOG");
+            Assert.assertEquals("Blog",submenuPageName1.getAttribute("innerHTML"));
         }
         else if (page.equals("CONTACT"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"CONTACT");
+            Assert.assertEquals("Contact",submenuPageName1.getAttribute("innerHTML"));
         }
         else if (page.equals("SHOP"))
         {
-            Assert.assertEquals(submenuPageName2.getText(),"SHOP");
+            Assert.assertEquals("Shop",submenuPageName1.getAttribute("innerHTML"));
         }
         else if(page.isEmpty())
         {
@@ -266,7 +261,7 @@ public class HomePageObject{
     //menu option click
     public void menuClick(String menu)
     {
-        int i = 0;
+        implicitWait();
         if (menu.equals("HOME"))
         {
             i = 8141;
@@ -295,7 +290,7 @@ public class HomePageObject{
         {
             i = 8114;
         }
-        driverLoc.findElement(By.xpath("//*[@id=\"menu-item-"+i+"\"]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"menu-item-"+i+"\"]/a")).click();
     }
 
     //popular course section value
@@ -308,12 +303,10 @@ public class HomePageObject{
         else if (courseName.equals("Learn Python – Interactive Python Tutorial"))
         {
             i = 2;
-
         }
         else if (courseName.equals("Your Complete Guide to Photography"))
         {
             i = 3;
-
         }
         else if (courseName.equals("Learning jQuery Mobile for Beginners"))
         {
@@ -326,54 +319,50 @@ public class HomePageObject{
         else if (courseName.equals("The Art of Black and White Photography"))
         {
             i = 6;
-
         }
         else if (courseName.equals("HTML5/CSS3 Essentials in 4-Hours"))
         {
             i = 7;
-
         }
         else if (courseName.equals("Complete Beginner to JavaScript Developer"))
         {
             i = 8;
         }
-
         return i;
     }
 
     //popular course section course and click read more button
-
     public void clickReadMore(int value)
     {
-        Actions hover = new Actions(driverLoc);
-        WebElement imageHover = driverLoc.findElement(By.xpath("//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/div/div["+value+"]/div/div[1]/a[1]"));
+        implicitWait();
+        Actions hover = new Actions(driver);
+        WebElement imageHover = driver.findElement(By.xpath("//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/div/div["+value+"]/div/div[1]/a[1]"));
         hover.moveToElement(imageHover).perform();
-        driverLoc.findElement(By.xpath("//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/div/div["+value+"]/div/div[1]/a[2]")).click();
+        driver.findElement(By.xpath("//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/div/div["+value+"]/div/div[1]/a[2]")).click();
     }
 
     //course name click
     public void courseNameClick(int value)
     {
-        driverLoc.findElement(By.xpath("//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/div/div["+value+"]/div/div[2]/h2/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/div/div["+value+"]/div/div[2]/h2/a")).click();
     }
 
     //course name click
     public void adminLink(int value)
     {
-        driverLoc.findElement(By.xpath("//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/div/div["+value+"]/div/div[2]/div[1]/div/div/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/div/div["+value+"]/div/div[2]/div[1]/div/div/a")).click();
     }
-
 
     //validate course name page
     public void courseNamePage(String courseNameValue)
     {
-        Assert.assertEquals(courseNameValue,courseName.getText());
+        Assert.assertEquals(courseNameValue,courseNameDisplay.getAttribute("innerHTML"));
     }
 
     //validate profile page
     public void profilePage()
     {
-        Assert.assertEquals("PROFILE",profilePage.getText());
+        Assert.assertEquals("Profile",profilePage.getAttribute("innerHTML"));
     }
 
     //view all button click
@@ -381,7 +370,4 @@ public class HomePageObject{
     {
         viewAllBtn.click();
     }
-
-
-
 }

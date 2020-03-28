@@ -1,10 +1,10 @@
-Feature: As a user
-          I need to validate Become an instructor page
+Feature: Validate Become an instructor page
 
-  Scenario Outline: Validate become an Instructor tab
+@instructor
+  Scenario Outline: Validate <tab> tab on become an Instructor Page
     Given I am on the application url
-    When I hover over the menu option as "COURSES" and select the submenu option as "Become an Instructor"
-    Then I should be on "BECOME A TEACHER" page
+    And I hover over the menu option as "COURSES"
+    And I select the submenu option as "Become an Instructor"
     When I go to "<tab>" and click on it
     Then I should see "<selected tab>" information
 
