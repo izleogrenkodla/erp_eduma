@@ -59,6 +59,18 @@ public class HomePageObject extends LoginPageObject{
     @FindBy(xpath="//*[@id=\"main-home-content\"]/div[4]/div/div/div/div[2]/a")
     WebElement viewAllBtn;
 
+    @FindBy(xpath = "//*[@id=\"colophon\"]/div/div/div[1]/a")
+    WebElement physCodePage;
+
+    @FindBy(xpath="//*[@id=\"masthead\"]/div/div/div[2]/a[1]")
+    WebElement thimpressPage;
+
+    @FindBy(xpath = "/html/body/div[1]/div[3]/div[1]/div[1]/header/div[2]/div/div/a")
+    WebElement envatoPage;
+
+    @FindBy(xpath="//*[@id=\"wporg-header\"]/div/h1/a")
+    WebElement wordPressPage;
+
     //Valid search click code
     public void validSearchFunction(String text)
     {
@@ -252,6 +264,22 @@ public class HomePageObject extends LoginPageObject{
         {
             Assert.assertEquals("Shop",submenuPageName1.getAttribute("innerHTML"));
         }
+        else if (page.equals("Phys code"))
+        {
+            physCodePage.isDisplayed();
+        }
+        else if (page.equals("THIMPRESS"))
+        {
+            thimpressPage.isDisplayed();
+        }
+        else if (page.equals("envarto Market Page"))
+        {
+            envatoPage.isDisplayed();
+        }
+        else if (page.equals("WordPress.Org"))
+        {
+            wordPressPage.isDisplayed();
+        }
         else if(page.isEmpty())
         {
             submenuPageName2.isDisplayed();
@@ -369,5 +397,98 @@ public class HomePageObject extends LoginPageObject{
     public void viewAllClick()
     {
         viewAllBtn.click();
+    }
+
+    //footer click
+    public void footerClick(String footer,String section)
+    {
+        implicitWait();
+        if(footer.equals("About Us"))
+        {
+            i = 8123;
+        }
+        else if(footer.equals("Blog"))
+        {
+            i = 8126;
+        }
+        else if (footer.equals("Contact"))
+        {
+            i = 8124;
+        }
+        else if(footer.equals("Become a Teacher"))
+        {
+            i = 8125;
+        }
+        else if(footer.equals("Courses"))
+        {
+            i = 8147;
+        }
+        else if(footer.equals("Events"))
+        {
+            i = 8127;
+        }
+        else if(footer.equals("Gallery"))
+        {
+            i = 8136;
+        }
+        else if(footer.equals("FAQs"))
+        {
+            i = 8128;
+        }
+        else if(footer.equals("Documentation"))
+        {
+            i = 8115;
+        }
+        else if(footer.equals("Forums"))
+        {
+            i = 8116;
+        }
+        else if(footer.equals("Language Packs"))
+        {
+            i = 8117;
+        }
+        else if(footer.equals("Release status"))
+        {
+            i = 8118;
+        }
+        else if(footer.equals("WordPress"))
+        {
+            i = 8139;
+        }
+        else if(footer.equals("LearnPress"))
+        {
+            i = 8140;
+        }
+        else if(footer.equals("WooCommerce"))
+        {
+            i = 8129;
+        }
+        else if(footer.equals("bbPress"))
+        {
+            i = 8137;
+        }
+        driver.findElement(By.xpath("//*[@id=\"menu-item-"+i+"\"]/a")).click();
+    }
+
+    public void footer(String linkText)
+    {
+        if(linkText.equals("Privacy"))
+        {
+            i = 8119;
+        }
+        else if(linkText.equals("Terms"))
+        {
+            i = 8120;
+        }
+        else if(linkText.equals("Sitemap"))
+        {
+            i = 8121;
+        }
+        else if(linkText.equals("Purchases"))
+        {
+            i = 8138;
+        }
+        driver.findElement(By.xpath("//*[@id=\"menu-item-"+i+"\"]/a")).click();
+
     }
 }
