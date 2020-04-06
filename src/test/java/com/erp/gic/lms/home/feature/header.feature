@@ -2,8 +2,8 @@ Feature: Validate header functionality in home page
 
   Scenario Outline: Validate the <menu> header option with <submenu> submenu
     Given I am on the application url
-    When I hover over the menu option as "<menu>"
-    And I select the submenu option as "<submenu>"
+    And I hover over the menu option as "<menu>"
+    When I select the submenu option as "<submenu>"
     Then I should be on "<option>" page
 
     Examples:
@@ -19,7 +19,7 @@ Feature: Validate header functionality in home page
       |FEATURES|Gallery|GALLERY|
       |FEATURES|About Us|ABOUT US|
       |FEATURES|FAQs|FAQ PAGE|
-
+  @header
   Scenario Outline: Validate <menu> header option click
     Given I am on the application url
     When I click on the menu option "<menu>"
@@ -34,10 +34,3 @@ Feature: Validate header functionality in home page
       |BLOG|BLOG|
       |CONTACT|CONTACT|
       |SHOP|SHOP|
-
-
-
-
-
-
-

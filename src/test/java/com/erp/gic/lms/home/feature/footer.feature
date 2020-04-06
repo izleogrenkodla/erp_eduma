@@ -1,5 +1,5 @@
 Feature: Validate the footer section
-
+  @footer
   Scenario Outline: Validate the footer <link> link in <category> section
     Given  I am on the application url
     When I scroll to the footer section and click on "<link>" link under "<category>"
@@ -23,7 +23,7 @@ Feature: Validate the footer section
       |LearnPress|RECOMMEND|WordPress.Org|
       |WooCommerce|RECOMMEND|SHOP|
       |bbPress|RECOMMEND|envarto Market Page|
-  @footer
+
   Scenario Outline: Validate the <link> link in footer
     Given  I am on the application url
     When I click on "<link>" on footer section
