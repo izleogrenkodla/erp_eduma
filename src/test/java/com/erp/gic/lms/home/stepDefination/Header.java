@@ -1,6 +1,7 @@
 package com.erp.gic.lms.home.stepDefination;
 
 import com.erp.gic.lms.home.HomePageObject;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -8,7 +9,7 @@ public class Header {
 
     HomePageObject homePageObject = new HomePageObject();
 
-    @When("^I hover over the menu option as \"(.*?)\"$")
+    @Given("^I hover over the menu option as \"(.*?)\"$")
     public void i_hover_over_the_menu_option_as(String menu) throws Throwable {
         homePageObject.hoverOverMenu(menu);
     }

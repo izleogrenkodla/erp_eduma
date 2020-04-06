@@ -7,11 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Random;
+
 public class HomePageObject extends LoginPageObject{
     
     int i = 0;
-    
-    @FindBy(name="s")
+
+    @FindBy(xpath = "//*[@id=\"main-home-content\"]/div[1]/div/div/div/div[1]/div/div/div/div/h3")
+    WebElement homePageTxtFld;
+
+    @FindBy(name = "s")
     WebElement searchTxtFld;
 
     @FindBy(xpath="//*[@id=\"main-home-content\"]/div[1]/div/div/div/div[1]/div/div/div/div/div[2]/ul/li[1]/a")
@@ -62,20 +67,34 @@ public class HomePageObject extends LoginPageObject{
     @FindBy(xpath = "//*[@id=\"colophon\"]/div/div/div[1]/a")
     WebElement physCodePage;
 
-    @FindBy(xpath="//*[@id=\"masthead\"]/div/div/div[2]/a[1]")
-    WebElement thimpressPage;
+    @FindBy(xpath = "//*[@id=\"main-home-content\"]/div[7]/div/div/div/div[2]/div/div[2]/div[3]/div/h3")
+    WebElement john;
 
-    @FindBy(xpath = "/html/body/div[1]/div[3]/div[1]/div[1]/header/div[2]/div/div/a")
-    WebElement envatoPage;
+    @FindBy(xpath = "//*[@id=\"main-home-content\"]/div[7]/div/div/div/div[2]/div/div[2]/div[4]/div/h3")
+    WebElement elsie;
 
-    @FindBy(xpath="//*[@id=\"wporg-header\"]/div/h1/a")
-    WebElement wordPressPage;
+    @FindBy(xpath = "//*[@id=\"main-home-content\"]/div[7]/div/div/div/div[2]/div/div[2]/div[5]/div/h3")
+    WebElement anthony;
+
+    @FindBy(xpath = "//*[@id=\"main-home-content\"]/div[7]/div/div/div/div[2]/div/div[2]/div[6]/div/h3")
+    WebElement susan;
+
+    @FindBy(xpath = "//*[@id=\"main-home-content\"]/div[7]/div/div/div/div[2]/div/div[2]/div[1]/div/h3")
+    WebElement peter;
+
+    @FindBy(xpath = "//*[@id=\"main-home-content\"]/div[7]/div/div/div/div[2]/div/div[2]/div[2]/div/h3")
+    WebElement manuel;
+
 
     //Valid search click code
     public void validSearchFunction(String text)
     {
         implicitWait();
         searchTxtFld.sendKeys(text);
+    }
+
+    public void firstCourseClick()
+    {
         courseNameDropDown.click();
     }
 
@@ -134,9 +153,9 @@ public class HomePageObject extends LoginPageObject{
     }
 
     //Validate collection page
-    public void collectionPageDisplay()
-    {
-        collectionPage.isDisplayed();
+    public void collectionPageDisplay() throws InterruptedException {
+        explicitWait(collectionPage);
+        Assert.assertEquals("COLLECTIONS",collectionPage.getText());
     }
 
     //hover over header menu
@@ -206,63 +225,78 @@ public class HomePageObject extends LoginPageObject{
     {
         if(page.equals("GENERAL"))
         {
-        Assert.assertEquals("General",submenuPageName2.getAttribute("innerHTML"));
+            explicitWait(submenuPageName2);
+            Assert.assertEquals("GENERAL",submenuPageName2.getText());
         }
         else if (page.equals("TECHNOLOGY"))
         {
-            Assert.assertEquals("Technology",submenuPageName2.getAttribute("innerHTML"));
+            explicitWait(submenuPageName2);
+            Assert.assertEquals("TECHNOLOGY",submenuPageName2.getText());
         }
         else if (page.equals("BACKEND"))
         {
-            Assert.assertEquals("Backend",submenuPageName2.getAttribute("innerHTML"));
+            explicitWait(submenuPageName2);
+            Assert.assertEquals("BACKEND",submenuPageName2.getText());
         }
         else if (page.equals("ALL COURSES"))
         {
-            Assert.assertEquals("All Courses",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("ALL COURSES",submenuPageName1.getText());
         }
         else if (page.equals("DEMO ACCOUNTS"))
         {
-            Assert.assertEquals("Demo Accounts",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("DEMO ACCOUNTS",submenuPageName1.getText());
         }
         else if (page.equals("BECOME A TEACHER"))
         {
-            Assert.assertEquals("Become a Teacher",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("BECOME A TEACHER",submenuPageName1.getText());
         }
         else if (page.equals("GALLERY"))
         {
-            Assert.assertEquals("Gallery",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("GALLERY",submenuPageName1.getText());
         }
         else if (page.equals("ABOUT US"))
         {
-            Assert.assertEquals("About Us",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("ABOUT US",submenuPageName1.getText());
         }
         else if (page.equals("FAQ PAGE"))
         {
-            Assert.assertEquals("FAQ Page",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("FAQ PAGE",submenuPageName1.getText());
         }
         else if(page.equals("HOME"))
         {
-            searchTxtFld.isDisplayed();
+            explicitWait(homePageTxtFld);
+            Assert.assertEquals("ONLINE COURSES TO LEARN",homePageTxtFld.getText());
         }
         else if (page.equals("EVENTS"))
         {
-            Assert.assertEquals("Events",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("EVENTS",submenuPageName1.getText());
         }
         else if (page.equals("PORTFOLIO MASONRY"))
         {
-            Assert.assertEquals("Portfolio Masonry",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("PORTFOLIO MASONRY",submenuPageName1.getText());
         }
         else if (page.equals("BLOG"))
         {
-            Assert.assertEquals("Blog",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("BLOG",submenuPageName1.getText());
         }
         else if (page.equals("CONTACT"))
         {
-            Assert.assertEquals("Contact",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("CONTACT",submenuPageName1.getText());
         }
         else if (page.equals("SHOP"))
         {
-            Assert.assertEquals("Shop",submenuPageName1.getAttribute("innerHTML"));
+            explicitWait(submenuPageName1);
+            Assert.assertEquals("SHOP",submenuPageName1.getText());
         }
         else if (page.equals("Phys code"))
         {
@@ -270,19 +304,15 @@ public class HomePageObject extends LoginPageObject{
         }
         else if (page.equals("THIMPRESS"))
         {
-            thimpressPage.isDisplayed();
+            Assert.assertEquals("Forums Archive - ThimPress",driver.getTitle());
         }
         else if (page.equals("envarto Market Page"))
         {
-            envatoPage.isDisplayed();
+            Assert.assertEquals("Education WordPress Theme | Eduma by ThimPress | ThemeForest",driver.getTitle());
         }
         else if (page.equals("WordPress.Org"))
         {
-            wordPressPage.isDisplayed();
-        }
-        else if(page.isEmpty())
-        {
-            submenuPageName2.isDisplayed();
+            Assert.assertEquals("LearnPress – WordPress LMS Plugin – WordPress plugin | WordPress.org",driver.getTitle());
         }
     }
 
@@ -384,13 +414,15 @@ public class HomePageObject extends LoginPageObject{
     //validate course name page
     public void courseNamePage(String courseNameValue)
     {
-        Assert.assertEquals(courseNameValue,courseNameDisplay.getAttribute("innerHTML"));
+       explicitWait(courseNameDisplay);
+        Assert.assertEquals(courseNameValue,courseNameDisplay.getText());
     }
 
     //validate profile page
     public void profilePage()
     {
-        Assert.assertEquals("Profile",profilePage.getAttribute("innerHTML"));
+       explicitWait(profilePage);
+        Assert.assertEquals("PROFILE",profilePage.getText());
     }
 
     //view all button click
@@ -489,6 +521,25 @@ public class HomePageObject extends LoginPageObject{
             i = 8138;
         }
         driver.findElement(By.xpath("//*[@id=\"menu-item-"+i+"\"]/a")).click();
+    }
+
+    public void imageClick()
+    {
+        implicitWait();
+        Random random = new Random();
+        int value = random.nextInt(6);
+        value++;
+        driver.findElement(By.xpath("//*[@id=\"main-home-content\"]/div[7]/div/div/div/div[2]/div/div[1]/ul/li["+value+"]")).click();
+    }
+
+    public void validateImageDisplay() throws InterruptedException {
+        Thread.sleep(2000);
+        if(peter.getText().equals("Peter Packer")) {}
+        else if(manuel.getText().equals("Manuel")) {}
+        else if(john.getText().equals("John Doe")) {}
+        else if(elsie.getText().equals("Elsie")) {}
+        else if(anthony.getText().equals("Anthony")) {}
+        else if(susan.getText().equals("Susan")) {}
 
     }
 }

@@ -1,6 +1,7 @@
 package com.erp.gic.lms.home.stepDefination;
 
 import com.erp.gic.lms.home.HomePageObject;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -8,9 +9,14 @@ public class SearchSD {
 
     HomePageObject homePageObject = new HomePageObject();
 
-    @When("^I enter the search result as \"(.*?)\" and select course from dropdown$")
-    public void i_enter_the_search_result_as_and_select_course_from_dropdown(String value) throws Throwable {
+    @Given("^I enter the search result as \"(.*?)\"$")
+    public void i_enter_the_search_result_as(String value) throws Throwable {
         homePageObject.validSearchFunction(value);
+    }
+
+    @When("^I select the first course from drop list$")
+    public void i_select_the_first_course_from_drop_list() throws Throwable {
+        homePageObject.firstCourseClick();
     }
 
     @Then("^I should see the selected course detail$")
@@ -23,8 +29,8 @@ public class SearchSD {
         homePageObject.invalidSearchFunction(invalidTerm);
     }
 
-    @Then("^I should see no course found in dropdown$")
-    public void i_should_see_no_course_found_in_dropdown() throws Throwable {
+    @Then("^I should see no course found in drop list$")
+    public void i_should_see_no_course_found_in_drop_list() throws Throwable {
         homePageObject.invalidSearchDisplay();
     }
 

@@ -6,11 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.concurrent.TimeUnit;
 
 public class LoginPageObject {
 
     public static WebDriver driver;
+    public WebDriverWait wait;
 
     @FindBy(xpath="//*[@id=\"login-popup-2\"]/div/div[1]/a")
     WebElement loginBtn;
@@ -36,6 +40,7 @@ public class LoginPageObject {
     {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
     }
 
     public void browserQuit()
@@ -64,5 +69,11 @@ public class LoginPageObject {
     public void implicitWait()
     {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public void explicitWait(WebElement elementName)
+    {
+        wait = new WebDriverWait(driver,5);
+        wait.until(ExpectedConditions.visibilityOf(elementName));
     }
 }
