@@ -1,5 +1,5 @@
 Feature: Validate Paid type
-
+  @paidtype
   Scenario Outline:Validate <course> link in All course section
     Given I am on the application url
     And I hover over the menu option as "COURSES"
@@ -17,7 +17,7 @@ Feature: Validate Paid type
   |PHOTOGRAPHY|
   |PROGRAMMING LANGUAGE|
   |TECHNOLOGY|
-  @paidtype
+
   Scenario: Validate course checkout
     Given I am on the application url
     And I hover over the menu option as "COURSES"

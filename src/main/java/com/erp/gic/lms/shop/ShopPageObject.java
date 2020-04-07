@@ -3,6 +3,7 @@ package com.erp.gic.lms.shop;
 import com.erp.gic.lms.login.LoginPageObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -12,6 +13,21 @@ public class ShopPageObject extends LoginPageObject {
 
     @FindBy(xpath = "//*[@id=\"thim-product-archive\"]/nav/ul/li[2]/a")
     WebElement nextPage;
+
+    @FindBy(xpath="//*[@id=\"post-1698\"]/div/div/div/div/div/a")
+    WebElement checkoutBtn;
+
+    @FindBy(name="add-to-cart")
+    WebElement addCartBtn;
+
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/a")
+    WebElement viewCart;
+
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/a")
+    WebElement clickCartBtn;
+
+    @FindBy(xpath = "//*[@id=\"main-content\"]/section/div[1]/div[1]/div/div/h1")
+    WebElement cartPageDisplay;
 
     public int getProductNumber(String productName)
     {
@@ -155,5 +171,41 @@ public class ShopPageObject extends LoginPageObject {
     public void nextPageClick()
     {
         nextPage.click();
+    }
+
+    public void cartClick(int value)
+    {
+        driver.findElement(By.xpath("//*[@id=\"thim-product-archive\"]/ul/li["+value+"]/div/div[2]/a[2]")).click();
+    }
+
+    public void cartClickView(int value)
+    {
+        driver.findElement(By.xpath("//*[@id=\"thim-product-archive\"]/ul/li["+value+"]/div/div[2]/a[3]")).click();
+    }
+
+    public void clickCheckoutBtn()
+    {
+        checkoutBtn.click();
+    }
+
+    public void clickAddCart()
+    {
+        addCartBtn.click();
+    }
+
+    public void viewCartBtn()
+    {
+        viewCart.isDisplayed();
+    }
+
+    public void clickViewCart()
+    {
+       clickCartBtn.click();
+    }
+
+    public void cartPage()
+    {
+        explicitWait(cartPageDisplay);
+        Assert.assertEquals("CART",cartPageDisplay.getText());
     }
 }
