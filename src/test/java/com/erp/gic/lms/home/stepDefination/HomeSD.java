@@ -63,4 +63,15 @@ public class HomeSD {
         homePageObject.viewAllClick();
     }
 
+    @When("^I click on logout button on home page$")
+    public void i_click_on_logout_button_on_home_page() throws Throwable {
+        homePageObject.clickLogout();
+    }
+
+    @Then("^I should be successfully logged out from application$")
+    public void i_should_be_successfully_logged_out_from_application() throws Throwable {
+        homePageObject.validateLogout();
+    }
+
+
 }

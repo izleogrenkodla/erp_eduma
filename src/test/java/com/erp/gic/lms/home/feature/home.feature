@@ -26,8 +26,16 @@ Feature: Validate Home Page
       |Best Courses for Photography|
       |Top Tutorials Code for Startup|
       |The Top PHP Tutorials|
-  @home
+
   Scenario: Validate image click on what people say section
     Given I am on the application url
     When I scroll down to what people say section and click on person image
     Then I should see information about what they say
+  @home
+  Scenario: Validate logout functionality
+    Given I am on the application url
+    And I click on the login button
+    And I enter the username as "testing" and password as "4vzdIu9XMUW)ubtU*V#EYjo9" and click on login button
+    And I should be successfully logged in and be on home page
+    When I click on logout button on home page
+    Then I should be successfully logged out from application

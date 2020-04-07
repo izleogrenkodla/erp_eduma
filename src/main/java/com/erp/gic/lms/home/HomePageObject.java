@@ -85,6 +85,11 @@ public class HomePageObject extends LoginPageObject{
     @FindBy(xpath = "//*[@id=\"main-home-content\"]/div[7]/div/div/div/div[2]/div/div[2]/div[2]/div/h3")
     WebElement manuel;
 
+    @FindBy(xpath = "//*[@id=\"login-popup-2\"]/div/div/a[2]")
+    WebElement logout;
+
+    @FindBy(xpath = "//*[@id=\"main-content\"]/section/div[1]/div/div/div/h1")
+    WebElement logoutDisplay;
 
     //Valid search click code
     public void validSearchFunction(String text)
@@ -217,6 +222,7 @@ public class HomePageObject extends LoginPageObject{
             {
                 i = 8111;
             }
+            implicitWait();
             driver.findElement(By.xpath("//*[@id=\"menu-item-"+i+"\"]/a")).click();
     }
 
@@ -304,14 +310,17 @@ public class HomePageObject extends LoginPageObject{
         }
         else if (page.equals("THIMPRESS"))
         {
+            implicitWait();
             Assert.assertEquals("Forums Archive - ThimPress",driver.getTitle());
         }
         else if (page.equals("envarto Market Page"))
         {
+            implicitWait();
             Assert.assertEquals("Education WordPress Theme | Eduma by ThimPress | ThemeForest",driver.getTitle());
         }
         else if (page.equals("WordPress.Org"))
         {
+            implicitWait();
             Assert.assertEquals("LearnPress – WordPress LMS Plugin – WordPress plugin | WordPress.org",driver.getTitle());
         }
     }
@@ -540,6 +549,16 @@ public class HomePageObject extends LoginPageObject{
         else if(elsie.getText().equals("Elsie")) {}
         else if(anthony.getText().equals("Anthony")) {}
         else if(susan.getText().equals("Susan")) {}
+    }
 
+    public void clickLogout()
+    {
+        logout.click();
+    }
+
+    public void validateLogout()
+    {
+        explicitWait(logoutDisplay);
+        Assert.assertEquals("ACCOUNT",logoutDisplay.getText());
     }
 }
